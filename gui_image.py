@@ -20,15 +20,15 @@ class App(customtkinter.CTk):
 
         # load and create background image
         current_path = os.path.dirname(os.path.realpath(__file__))
-        self.bg_image = customtkinter.CTkImage(Image.open(current_path + "/media/hakke_bkg_clean.png"),
+        self.bg_image = customtkinter.CTkImage(Image.open(current_path + "/media/hakke_bkg.png"),
                                                size=(self.width, self.height))
-        self.bg_image_label = customtkinter.CTkLabel(self, image=self.bg_image)
+        self.bg_image_label = customtkinter.CTkLabel(self, image=self.bg_image, text="")
         self.bg_image_label.grid(row=0, column=0)
 
         def print_text():
             total_score = int(score_entry1.get()) + int(score_entry2.get()) + int(score_entry3.get()) + int(score_entry4.get()) + int(score_entry5.get())
             data_str = [film_entry.get(), score_entry1.get(), score_entry2.get(), score_entry3.get(), score_entry4.get(), score_entry5.get(), total_score]
-            total_score_label.configure(text=total_score)
+            total_score_label.configure(text=total_score, text_color="black")
             print("Text entered:", data_str)
 
             # Open the "database.csv" file in append mode ('a', newline='') to add data to it
@@ -39,35 +39,39 @@ class App(customtkinter.CTk):
 
             print("Data added to 'database.csv'.")
 
+        def beregn_total():
+            total_score = int(score_entry1.get()) + int(score_entry2.get()) + int(score_entry3.get()) + int(score_entry4.get()) + int(score_entry5.get())
+            total_score_label.configure(text=total_score, text_color="black")
+
         # definer indsæt_knap
-        button = customtkinter.CTkButton(self, text="Indsæt", command=print_text, text_color="black", fg_color="white", hover_color="gray")
+        button = customtkinter.CTkButton(self, text="HAK!", command=print_text, text_color="black", fg_color="white", hover_color="gray", bg_color="white", border_width=0, width=185)
 
         # definer score_entries
-        score_entry1 = customtkinter.CTkEntry(self, placeholder_text="Score", width=50, text_color="black", fg_color="white")
-        score_entry2 = customtkinter.CTkEntry(self, placeholder_text="Score", width=50, text_color="black", fg_color="white")
-        score_entry3 = customtkinter.CTkEntry(self, placeholder_text="Score", width=50, text_color="black", fg_color="white")
-        score_entry4 = customtkinter.CTkEntry(self, placeholder_text="Score", width=50, text_color="black", fg_color="white")
-        score_entry5 = customtkinter.CTkEntry(self, placeholder_text="Score", width=50, text_color="black", fg_color="white")
+        score_entry1 = customtkinter.CTkEntry(self, placeholder_text="...", width=40, text_color="black", fg_color="white", bg_color="white", border_width=0, justify="center")
+        score_entry2 = customtkinter.CTkEntry(self, placeholder_text="...", width=40, text_color="black", fg_color="white", bg_color="white", border_width=0, justify="center")
+        score_entry3 = customtkinter.CTkEntry(self, placeholder_text="...", width=40, text_color="black", fg_color="white", bg_color="white", border_width=0, justify="center")
+        score_entry4 = customtkinter.CTkEntry(self, placeholder_text="...", width=40, text_color="black", fg_color="white", bg_color="white", border_width=0, justify="center")
+        score_entry5 = customtkinter.CTkEntry(self, placeholder_text="...", width=40, text_color="black", fg_color="white", bg_color="white", border_width=0, justify="center")
 
         # definer film_titel_entry
-        film_entry = customtkinter.CTkEntry(self, placeholder_text="Filmtitel", text_color="black", fg_color="white")
+        film_entry = customtkinter.CTkEntry(self, placeholder_text="...", text_color="black", fg_color="white", bg_color="white", border_width=0, justify="center")
 
         # Definer total score
-        total_score_label = customtkinter.CTkLabel(self, state="normal", text="...", width=50, text_color="black", fg_color="white")
+        total_score_label = customtkinter.CTkLabel(self, state="normal", text="???", width=40, text_color="gray", fg_color="white")
 
         # indsæt filmtitel i vindue
-        film_entry.place(relx=0.20, rely=0.7125, anchor=CENTER)
+        film_entry.place(relx=0.21, rely=0.7125, anchor=CENTER)
 
 
         # indsæt scores i vindue
-        score_entry1.place(relx=0.385, rely=0.7125, anchor=CENTER)
-        score_entry2.place(relx=0.48, rely=0.7125, anchor=CENTER)
+        score_entry1.place(relx=0.387, rely=0.7125, anchor=CENTER)
+        score_entry2.place(relx=0.478, rely=0.7125, anchor=CENTER)
         score_entry3.place(relx=0.57, rely=0.7125, anchor=CENTER)
         score_entry4.place(relx=0.657, rely=0.7125, anchor=CENTER)
-        score_entry5.place(relx=0.745, rely=0.7125, anchor=CENTER)
+        score_entry5.place(relx=0.743, rely=0.7125, anchor=CENTER)
 
         # Indsæt total score i vindue
-        total_score_label.place(relx=0.835, rely=0.7125, anchor=CENTER)
+        total_score_label.place(relx=0.834, rely=0.712, anchor=CENTER)
 
         # Indsæt knap i vindue
         button.place(relx=0.5, rely=0.865, anchor=CENTER)
